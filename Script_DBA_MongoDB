@@ -27,3 +27,4 @@ final = sorted(final, reverse=True)
 with open (‘trans.json’, ‘w’) as outfile:
  json.dumps(final, outfile)
 col_trans.insert(file_data)
+client.close()
