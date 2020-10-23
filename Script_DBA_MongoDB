@@ -1,0 +1,29 @@
+import requests
+import re
+from bs4 import BeautifulSoup
+import urllib
+import json
+Import pymongo as mongo
+import  pymongo  as mongo2client = mongo.MongoClient("mongodb ://127.0.0.1:27017")
+
+BIT_db = client[“transactions”]
+col_trans = local_database[“transactions”]
+
+result = requests.get("https://www.blockchain.com/btc/unconfirmed-transactions")
+src = result.content
+soup = BeautifulSoup(src, 'lxml')
+spans = soup.find_all('span', {'class' : 'sc-1ryi78w-0 gCzMgE sc-16b9dsl-1 kUAhZx u3ufsr-0 fGQJzg'})
+lines = [span.get_text() for span in spans]
+r1 = re.compile("^\$?\-?([1-9]{1}[0-9]{0,2}(\,\d{3})*(\.\d{0,2})?|[1-9]{1}\d{0,}(\.\d{0,2})?|0(\.\d{0,2})?|(\.\d{1,2}))$|^\-?\$?([1-9]{1}\d{0,2}(\,\d{3})*(\.\d{0,2})?|[1-9]{1}\d{0,}(\.\d{0,2})?|0(\.\d{0,2})?|(\.\d{1,2}))$|^\(\$?([1-9]{1}\d{0,2}(\,\d{3})*(\.\d{0,2})?|[1-9]{1}\d{0,}(\.\d{0,2})?|0(\.\d{0,2})?|(\.\d{1,2}))\)$")
+temp = list(filter(r1.match, lines))
+transactions = []
+final = []
+for x in temp:
+    transactions.append(x[1:])
+for x in transactions:
+    final.append(x.replace(',',''))
+final = [float(i) for i in final]   
+final = sorted(final, reverse=True)
+with open (‘trans.json’, ‘w’) as outfile:
+ json.dumps(final, outfile)
+col_trans.insert(file_data)
