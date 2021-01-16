@@ -1,0 +1,17 @@
+TITLE: Microsoft SQL Server 2019 Setup
+------------------------------
+
+The following error has occurred:
+
+A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+
+Click 'Retry' to retry the failed action, or click 'Cancel' to cancel this action and continue setup.
+
+For help, click: https://go.microsoft.com/fwlink?LinkID=20476&ProdName=Microsoft%20SQL%20Server&EvtSrc=setup.rll&EvtID=50000&ProdVer=15.0.4013.40&EvtType=0xDC80C325
+
+------------------------------
+BUTTONS:
+
+&Retry
+Cancel
+------------------------------
